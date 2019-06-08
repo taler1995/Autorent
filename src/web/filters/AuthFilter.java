@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import static web.command.enums.ControllerType.ORDERS;
+import static web.command.enums.ControllerType.PREORDER;
 
 /**
  * Class AuthFilter
@@ -40,6 +41,17 @@ public class AuthFilter implements Filter {
             String contextPath = req.getContextPath();
             HttpSession session = req.getSession();
             if((session.getAttribute("user") == null)) {
+                res.sendRedirect(contextPath + "/frontController?command=login");
+                return;
+            }
+        }
+        if (PREORDER.equals(type)) {
+            String contextPath = req.getContextPath();
+            HttpSession session = req.getSession();
+            String param = req.getParameter("command");
+            ControllerType type1 = ControllerType.getByPageName(param);
+            session.setAttribute("type1",type1);
+            if ((session.getAttribute("user") == null)) {
                 res.sendRedirect(contextPath + "/frontController?command=login");
                 return;
             }

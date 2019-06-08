@@ -121,6 +121,7 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
         return list;
     }
 
+
     private Order populateEntity(ResultSet rs) throws SQLException {
         Order order = new Order();
         order.setId(rs.getLong(1));

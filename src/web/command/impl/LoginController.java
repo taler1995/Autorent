@@ -5,12 +5,18 @@ import services.UserService;
 import services.impl.UserServiceImpl;
 import web.auth.Encoder;
 import web.command.Controller;
+import web.command.enums.ControllerType;
+import web.handlers.RequestHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
+import static web.command.enums.ControllerType.ORDERS;
+import static web.command.enums.ControllerType.PREORDER;
 
 /**
  * Created by yslabko on 08/13/2017.
@@ -33,7 +39,7 @@ public class LoginController implements Controller {
 //        if (user != null && password.equals(user.getPassword())) {
             req.getSession().setAttribute("user", user);
             String contextPath = req.getContextPath();
-            resp.sendRedirect(contextPath+ "/frontController?command=orders");
+                resp.sendRedirect(contextPath + "/frontController?command=cars");
             return;
         } else {
             resp.setHeader("errorMsg", "Invalid Login or Password");

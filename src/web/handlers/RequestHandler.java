@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import static web.command.enums.ControllerType.CARS;
+import static web.command.enums.ControllerType.PREORDER;
 
 /**
  * Created by yslabko on 08/13/2017.

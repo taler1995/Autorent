@@ -17,7 +17,8 @@ public enum ControllerType {
     ADD_PRODUCTS_AJAX("", "addProduct", "", new AddToBasketController()),
     CARS("cars/main.jsp", "Cars", "cars.title", new CarsController()),
     REG ("reg/main.jsp","Reg","reg.title", new RegController()),
-    PREORDER("preorder/main.jsp","Preorder","order.title",new PreOrdersController());
+    PREORDER("preorder/main.jsp","Preorder","order.title",new PreOrdersController()),
+    ACCEPT("accept/main.jsp","Accept","accept.title",new AcceptController());
 
     private String pagePath;
     private String pageName;
