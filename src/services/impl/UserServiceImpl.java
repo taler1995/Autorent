@@ -27,6 +27,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
             user = userDao.save(user);
             commit();
         } catch (SQLException e) {
+            rollback();
             throw new ServiceException("Error creating Item" + user);
         }
         return user;
