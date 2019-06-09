@@ -46,30 +46,6 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     }
 
     @Override
-    public Order createOrder(long userId, long carsId, int quantity) {
-        Order order = new Order();
-        try {
-            startTransaction();
-            order.setIdClients(userId);
-
-            Cars product = carsDao.get(carsId);
-            if (quantity < 1) {
-                quantity = 1;
-            }
-            order.setTotal(product.getPrice() * quantity);
-            order = orderDao.save(order);
-
-            Item item = new Item(order.getId(), carsId, quantity);
-            itemDao.save(item);
-            commit();
-            return order;
-        } catch (SQLException e) {
-            rollback();
-            throw new ServiceException("Error creating Order " + order, e);
-        }
-    }
-
-    @Override
     public Order get(Serializable id) {
         try {
             return orderDao.get(id);
@@ -97,25 +73,27 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     }
 
     @Override
+    public List<Order> getAll() {
+        try {
+            startTransaction();
+            List<Order> list = orderDao.getAll();
+            commit();
+            return list;
+        } catch (SQLException e) {
+            rollback();
+            throw new ServiceException("Error getting Products");
+        }
+    }
+
+    @Override
     public List<Order> getByUserId(long userId) {
         try {
             startTransaction();
-            List<Order> orders = orderDao.getByUserId(userId);
-            for (Order order : orders) {
-                List<Item> items = itemDao.getByOrderId(order.getId());
-                order.setItems(items);
-                double sum = 0;
-                for (Item item : items) {
-                    Cars product = carsDao.get(item.getProductId());
-                    sum += product.getPrice() * item.getQuantity();
-                }
-                commit();
-                order.setTotal(sum);
-            }
-            return orders;
+            List<Order> list = orderDao.getByUserId(userId);
+            commit();
+            return list;
         } catch (SQLException e) {
-            rollback();
-            throw new ServiceException("Error getting Orders by userId" + userId);
+            throw new ServiceException("Error deleting Order by id" + userId);
         }
     }
 

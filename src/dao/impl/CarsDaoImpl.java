@@ -13,7 +13,7 @@ import entities.Cars;
 
 /**
  * Class ProductDaoImpl
- *
+ * <p>
  * Created by yslabko on 08/08/2017.
  */
 public class CarsDaoImpl extends AbstractDao implements CarsDao {
@@ -65,7 +65,7 @@ public class CarsDaoImpl extends AbstractDao implements CarsDao {
     @Override
     public Cars get(Serializable id) throws SQLException {
         psGet = prepareStatement(getCarsQuery);
-        psGet.setLong(1, (long)id);
+        psGet.setLong(1, (long) id);
         psGet.executeQuery();
         ResultSet rs = psGet.getResultSet();
         if (rs.next()) {
@@ -97,7 +97,7 @@ public class CarsDaoImpl extends AbstractDao implements CarsDao {
     @Override
     public int delete(Serializable id) throws SQLException {
         psDelete = prepareStatement(deleteCarsQuery);
-        psDelete.setLong(1, (long)id);
+        psDelete.setLong(1, (long) id);
         return psDelete.executeUpdate();
     }
 
@@ -122,7 +122,7 @@ public class CarsDaoImpl extends AbstractDao implements CarsDao {
         ResultSet rs = psGetById.executeQuery();
         Cars cars = null;
         if (rs.next()) {
-            cars= populateProduct(rs);
+            cars = populateProduct(rs);
         }
         close(rs);
 

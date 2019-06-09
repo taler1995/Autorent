@@ -19,7 +19,7 @@
     }
 </style>
 <div class="container text-left">
-    <form action="frontController?command=reg" method="get">
+    <form action="frontController?command=reg" method="post">
         <table>
             <fmt:setLocale value="${sessionScope.locale}"/>
             <fmt:setBundle basename="messages" var="i18n"/>
@@ -41,11 +41,11 @@
         </tr>
         <tr>
             <td> <label> <b><fmt:message bundle="${i18n}" key="user.birthday"/></b></label></td>
-            <td>  <input type="text" name="birthday" maxlength="20"/></td>
+            <td>  <input type="date" name="birthday" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}"  maxlength="20"/></td>
         </tr>
         <tr>
             <td> <label><b><fmt:message bundle="${i18n}" key="user.passport_lett"/></b></label></td>
-            <td> <input type="text" name="passport_lett" maxlength="20"/></td>
+            <td> <input type="text" name="passport_lett" maxlength="2"/></td>
         </tr>
         <tr>
             <td> <label> <b><fmt:message bundle="${i18n}" key="user.passport_id"/></b></label></td>

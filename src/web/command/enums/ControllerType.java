@@ -14,11 +14,11 @@ public enum ControllerType {
     LOGIN("login.jsp", "Login", "login.title", new LoginController()),
     LOGOUT("login.jsp", "Logout", "logout.title", new LogoutController()),
     ORDERS("orders/main.jsp", "Orders", "orders.title", new OrderController()),
-    ADD_PRODUCTS_AJAX("", "addProduct", "", new AddToBasketController()),
     CARS("cars/main.jsp", "Cars", "cars.title", new CarsController()),
     REG ("reg/main.jsp","Reg","reg.title", new RegController()),
     PREORDER("preorder/main.jsp","Preorder","order.title",new PreOrdersController()),
-    ACCEPT("accept/main.jsp","Accept","accept.title",new AcceptController());
+    ACCEPT("accept/main.jsp","Accept","accept.title",new AcceptController()),
+    NEXT("accept/next.jsp","Next","next.title",new NextController());
 
     private String pagePath;
     private String pageName;

@@ -17,12 +17,12 @@ import entities.Order;
 public class OrderDaoImpl extends AbstractDao implements OrderDao {
     private static volatile OrderDao INSTANCE = null;
 
-    private static final String saveOrderQuery = "INSERT INTO ORDERS (ID_CARS, USER_ID, DATE_START_ORDER, DATE_FINISH_ORDER, TOTAL) VALUES (?,?,?,?,?)";
+        private static final String saveOrderQuery = "INSERT INTO ORDERS (USER_ID, ID_CARS, DATE_START_ORDER, DATE_FINISH_ORDER, TOTAL) VALUES (?,?,?,?,?)";
     private static final String updateOrderQuery = "UPDATE ORDERS SET ID_CARS=?, USER_ID=?, DATE_START_ORDER=?, DATE_FINISH_ORDER=?, TOTAL=? WHERE ID=?";
     private static final String getOrderQuery = "SELECT * FROM ORDERS WHERE ID=?";
     private static final String deleteOrderQuery = "DELETE FROM ORDERS WHERE ID=?";
     private static final String getAllOrderQuery = "SELECT * FROM ORDERS";
-    private static final String getAllByUserQuery = "SELECT ID, USER_ID FROM ORDERS WHERE USER_ID = ? ORDER BY ID DESC";
+    private static final String getAllByUserQuery = "SELECT * FROM ORDERS WHERE USER_ID = ?";
     private static final String deleteAllDamage = "DELETE FROM ORDERS";
 
     private PreparedStatement psSave;
@@ -125,8 +125,8 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     private Order populateEntity(ResultSet rs) throws SQLException {
         Order order = new Order();
         order.setId(rs.getLong(1));
-        order.setIdCars(rs.getLong(2));
-        order.setIdClients(rs.getLong(3));
+        order.setIdClients(rs.getLong(2));
+        order.setIdCars(rs.getLong(3));
         order.setStart(rs.getDate(4));
         order.setFinish(rs.getDate(5));
         order.setTotal(rs.getDouble(6));

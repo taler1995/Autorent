@@ -3,18 +3,20 @@
 
 <TABLE>
     <tr>
-        <th>№</th>
-        <th>Order Id</th>
-        <th>User id</th>
-        <th>Sum</th>
+        <th>User name</th>
+        <th>Start order</th>
+        <th>Finish order</th>
+        <th>Total</th>
+        <th></th>
+        <%--<th>${cars.model}</th>--%>
     </tr>
 
-    <c:forEach var="order" items="${orders}" varStatus="status">
+    <c:forEach var="orders" items="${orders}" varStatus="status">
         <tr>
-            <td>${status.index + 1}</td>
-            <td>${order.id}</td>
-            <td>${order.userId}</td>
-            <td>${order.total}</td>
+            <td>${user.name} ${user.surname}</td>
+            <td>${orders.start}</td>
+            <td>${orders.finish}</td>
+            <td>${orders.total}</td>
         </tr>
     </c:forEach>
 </TABLE>

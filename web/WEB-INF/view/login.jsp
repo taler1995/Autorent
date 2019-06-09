@@ -12,9 +12,9 @@
         <b><fmt:message bundle="${i18n}" key="login.password"/></b>
         <input type="password" name="password" maxlength="20"/><br/>
         <input type="submit" value="<fmt:message bundle="${i18n}" key="login.submit"/>">
-        <a href="${pageContext.request.contextPath}/frontController?command=reg">
-            <input type="submit" value="<fmt:message bundle="${i18n}" key="reg.title"/>">
-        </a>
     </form>
+    <a href="${pageContext.request.contextPath}/frontController?command=reg">
+        <input type="submit" value="<fmt:message bundle="${i18n}" key="reg.title"/>">
+    </a>
 
 </div>

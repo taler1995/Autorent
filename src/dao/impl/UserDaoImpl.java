@@ -11,6 +11,7 @@ import java.util.List;
 
 import dao.UserDao;
 import db.ConnectionManager;
+import entities.Cars;
 import entities.User;
 
 /**
@@ -21,7 +22,9 @@ import entities.User;
 public class UserDaoImpl extends AbstractDao implements UserDao {
     private static volatile UserDao INSTANCE = null;
 
+
     private static final String getUser = "SELECT * FROM USER WHERE LOGIN=?";
+    private static final String getUserById = "SELECT * FROM USER WHERE USER_ID=?";
     private static final String saveUserQuery = "INSERT INTO USER (NAME,SURNAME,LOGIN,PASSWORD,BIRTHDAY, PASSPORT_LETT,PASSPORT_ID,COUNTRY,IDENTIFICATION_NUMBER,DRIVING_EXPERIENCE,NUMBER_OF_PHONE,EMAIL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
     private static final String updateUserQuery = "UPDATE USER SET NAME=?, SURNAME=?,LOGIN=?,PASSWORD=?,BIRTHDAY=?, PASSPORT_LETT=?, PASSPORT_ID=?, COUNTRY=?, IDENTIFICATION_NUMBER=?, DRIVING_EXPERIENCE=?, NUMBER_OF_PHONE=?, EMAIL=? WHERE USER_ID=?";
     private static final String getUserQuery = "SELECT * FROM USER WHERE USER_ID=?";
@@ -29,6 +32,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     private static final String getAllUserQuery = "SELECT * FROM USER";
     private static final String deleteAllDamage = "DELETE FROM USER";
     private static final String countAllUser = "SELECT COUNT(NAME) FROM USER";
+
 
     private PreparedStatement psGetByLogin;
     private PreparedStatement psSave;
@@ -38,8 +42,12 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     private PreparedStatement psDelete;
     private PreparedStatement psDeleteAll;
     private PreparedStatement psCount;
+    private PreparedStatement psGetId;
+
     {
         try {
+
+            psGetId = ConnectionManager.getConnection().prepareStatement(getUserById);
             psSave = ConnectionManager.getConnection().prepareStatement(saveUserQuery, Statement.RETURN_GENERATED_KEYS);
             psUpdate = ConnectionManager.getConnection().prepareStatement(updateUserQuery);
             psGet = ConnectionManager.getConnection().prepareStatement(getUserQuery);
@@ -50,8 +58,22 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             e.printStackTrace();
         }
     }
+
     private UserDaoImpl() {
 
+    }
+
+    @Override
+    public User getById(long Id) throws SQLException {
+        psGetId.setLong(1, Id);
+        ResultSet rs = psGetId.executeQuery();
+        User user = null;
+        if (rs.next()) {
+            user = populateEntity(rs);
+        }
+        close(rs);
+
+        return user;
     }
 
     @Override
@@ -124,7 +146,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         psUpdate.setString(2, user.getSurname());
         psUpdate.setString(3, user.getLogin());
         psUpdate.setString(4, user.getPassword());
-        psUpdate.setDate(5,user.getBirthday());
+        psUpdate.setDate(5, user.getBirthday());
         psUpdate.setString(6, user.getPasportLett());
         psUpdate.setLong(7, user.getPassportId());
         psUpdate.setString(8, user.getCountry());

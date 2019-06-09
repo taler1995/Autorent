@@ -74,7 +74,7 @@ public class RegController implements Controller {
             int driv_exp = Integer.parseInt(driv_exp_def);
             int number_of_phone = Integer.parseInt(number_of_phone_def);
             User us = new User(name, surname, login, password, birthday, pass_lett, pass_id, country, identif, driv_exp, number_of_phone, email);
-            User user = userService.save(us);
+            userService.save(us);
             String contextPath = req.getContextPath();
             resp.sendRedirect(contextPath + "/frontController?command=cars");
         }

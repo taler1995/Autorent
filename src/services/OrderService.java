@@ -14,10 +14,10 @@ import entities.Order;
  */
 public interface OrderService {
     Order save(Order item);
-    Order createOrder(long userId, long carsId, int quantity);
-    Order get(Serializable id);
+        Order get(Serializable id);
     void update(Order order);
     int delete(Serializable id);
 
+    List<Order> getAll();
     List<Order> getByUserId(long userId);
 }

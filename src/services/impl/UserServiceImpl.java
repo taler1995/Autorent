@@ -42,6 +42,16 @@ public class UserServiceImpl extends AbstractService implements UserService {
     }
 
     @Override
+    public User getById(long Id) {
+        try {
+            return userDao.getById(Id);
+        }
+        catch (SQLException e) {
+            throw new ServiceException("Error getting User by login" + Id);
+        }
+    }
+
+    @Override
     public List<User> getAll() {
         try {
             startTransaction();

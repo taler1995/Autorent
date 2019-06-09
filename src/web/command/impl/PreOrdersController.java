@@ -29,9 +29,10 @@ public class PreOrdersController implements Controller {
         List<Order> orders = orderService.getByUserId(user.getId());*/
         String car1 =  req.getParameter("id");
         int cars = Integer.parseInt(car1);
+
         User user = (User)req.getSession().getAttribute("user");
-        List<Order> orders = orderService.getByUserId(user.getId());
-        req.setAttribute("orders", orders);
+        long a = user.getId();
+        req.getSession().setAttribute("user",userService.getById(a));
 //        Cars cars = carsSvice.getById(car1.getId());
        /* req.getSession().setAttribute("order", carsService.getAll());
         req.getRequestDispatcher(MAIN_PAGE).forward(req, resp);*/

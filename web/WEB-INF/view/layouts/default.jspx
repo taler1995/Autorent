@@ -27,7 +27,7 @@
 
         /* Add a gray background color and some padding to the footer */
         footer {
-            background-color: #2f84f2;
+            background-color: #10000c;
             padding: 25px;
         }
     </style>
