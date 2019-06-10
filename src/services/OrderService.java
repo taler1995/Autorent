@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-import entities.Item;
 import entities.Order;
 
 /**
@@ -13,7 +12,7 @@ import entities.Order;
  * Created by yslabko on 08/09/2017.
  */
 public interface OrderService {
-    Order save(Order item);
+    Order save(Order item) throws SQLException;
         Order get(Serializable id);
     void update(Order order);
     int delete(Serializable id);

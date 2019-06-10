@@ -4,6 +4,7 @@ package web.command;
         import javax.servlet.http.HttpServletRequest;
         import javax.servlet.http.HttpServletResponse;
         import java.io.IOException;
+        import java.sql.SQLException;
         import java.text.ParseException;
 
 /**
@@ -12,5 +13,5 @@ package web.command;
 public interface Controller {
     String MAIN_PAGE ="/WEB-INF/view/layouts/default.jspx";
 
-    void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, ParseException;
+    void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, ParseException, SQLException;
 }

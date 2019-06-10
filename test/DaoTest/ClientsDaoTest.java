@@ -29,7 +29,7 @@ public class ClientsDaoTest {
         System.out.println(beforeSave);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date(df.parse("2019-05-05").getTime());
-        User newUser = user.save(new User("111", "111", "11","ds", date, "11",
+        User newUser = user.save(new User("111", "111", "111","ds", date, "11",
                 111, "465", "45688", 111, 1234, "123"));
         int afterSave = user.getAll().size();
         System.out.println(user.getAll());

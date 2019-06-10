@@ -4,6 +4,7 @@ import web.command.enums.ControllerType;
 import web.handlers.RequestHandler;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 import javax.servlet.ServletException;
@@ -25,6 +26,8 @@ public class FrontController extends HttpServlet {
         try {
             controllerType.getController().execute(req, resp);
         } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

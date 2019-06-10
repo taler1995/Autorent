@@ -1,12 +1,12 @@
 package services.impl;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 import dao.UserDao;
 import dao.impl.UserDaoImpl;
-import entities.Cars;
-import entities.Item;
+import db.ConnectionManager;
 import entities.User;
 import services.ServiceException;
 import services.UserService;
@@ -21,13 +21,14 @@ public class UserServiceImpl extends AbstractService implements UserService {
     private UserDao userDao = UserDaoImpl.getInstance();
 
     @Override
-    public User save(User user) {
+    public User save(User user) throws SQLException {
         try {
-            startTransaction();
+            Connection connection = ConnectionManager.getConnection();
+            connection.setAutoCommit(false);
             user = userDao.save(user);
-            commit();
+            ConnectionManager.getConnection().commit();
         } catch (SQLException e) {
-            rollback();
+            ConnectionManager.getConnection().rollback();
             throw new ServiceException("Error creating Item" + user);
         }
         return user;

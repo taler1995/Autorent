@@ -15,6 +15,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,7 +27,7 @@ public class AcceptController implements Controller {
     OrderService orderService = OrderServiceImpl.getInstance();
 
     @Override
-    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, ParseException {
+    public void execute(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException, ParseException, SQLException {
         String start = req.getParameter("date_start_order");
         String finish = req.getParameter("date_finish_order");
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");

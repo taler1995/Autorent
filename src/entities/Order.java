@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-    private List<Item> items = new ArrayList<>();
     private long id;
     private long idClients;
     private long idCars;

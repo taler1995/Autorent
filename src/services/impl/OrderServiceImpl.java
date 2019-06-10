@@ -1,21 +1,18 @@
 package services.impl;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 import dao.CarsDao;
-import dao.ItemDao;
 import dao.OrderDao;
 import dao.UserDao;
 import dao.impl.CarsDaoImpl;
-import dao.impl.ItemDaoImpl;
 import dao.impl.OrderDaoImpl;
 import dao.impl.UserDaoImpl;
-import entities.Cars;
-import entities.Item;
+import db.ConnectionManager;
 import entities.Order;
-import entities.User;
 import services.OrderService;
 import services.ServiceException;
 
@@ -30,16 +27,17 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     private OrderDao orderDao = OrderDaoImpl.getInstance();
     private UserDao userDao = UserDaoImpl.getInstance();
     private CarsDao carsDao = CarsDaoImpl.getInstance();
-    private ItemDao itemDao = ItemDaoImpl.getInstance();
 
 
     @Override
-    public Order save(Order order) {
+    public Order save(Order order) throws SQLException {
         try {
-            startTransaction();
+            Connection connection = ConnectionManager.getConnection();
+            connection.setAutoCommit(false);
             order = orderDao.save(order);
-            commit();
+            ConnectionManager.getConnection().commit();
         } catch (SQLException e) {
+            ConnectionManager.getConnection().rollback();
             throw new ServiceException("Error creating Item" + order);
         }
         return order;

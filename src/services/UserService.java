@@ -1,9 +1,8 @@
 package services;
 
-import entities.Cars;
-import entities.Item;
 import entities.User;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,7 +11,7 @@ import java.util.List;
  * Created by yslabko on 08/11/2017.
  */
 public interface UserService {
-    User save(User user);
+    User save(User user) throws SQLException;
 
     User getByLogin(String login);
     User getById(long Id);

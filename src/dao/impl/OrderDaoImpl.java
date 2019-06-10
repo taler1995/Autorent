@@ -17,7 +17,7 @@ import entities.Order;
 public class OrderDaoImpl extends AbstractDao implements OrderDao {
     private static volatile OrderDao INSTANCE = null;
 
-        private static final String saveOrderQuery = "INSERT INTO ORDERS (USER_ID, ID_CARS, DATE_START_ORDER, DATE_FINISH_ORDER, TOTAL) VALUES (?,?,?,?,?)";
+    private static final String saveOrderQuery = "INSERT INTO RENT.orders (USER_ID, ID_CARS, DATE_START_ORDER, DATE_FINISH_ORDER, TOTAL) VALUES (?,?,?,?,?)";
     private static final String updateOrderQuery = "UPDATE ORDERS SET ID_CARS=?, USER_ID=?, DATE_START_ORDER=?, DATE_FINISH_ORDER=?, TOTAL=? WHERE ID=?";
     private static final String getOrderQuery = "SELECT * FROM ORDERS WHERE ID=?";
     private static final String deleteOrderQuery = "DELETE FROM ORDERS WHERE ID=?";
@@ -136,7 +136,7 @@ public class OrderDaoImpl extends AbstractDao implements OrderDao {
     public static OrderDao getInstance() {
         OrderDao itemDao = INSTANCE;
         if (itemDao == null) {
-            synchronized (ItemDaoImpl.class) {
+            synchronized (OrderDaoImpl.class) {
                 itemDao = INSTANCE;
                 if (itemDao == null) {
                     INSTANCE = itemDao = new OrderDaoImpl();
